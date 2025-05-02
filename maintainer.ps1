@@ -116,7 +116,7 @@ function Update-StoreApps {
 
         # Method 3: URI Scheme
         try {
-            $Result = Start-Process "ms-windows-store://downloadsandupdates" -PassThru
+            Start-Process "ms-windows-store://downloadsandupdates" -ErrorAction Stop
             Start-Sleep -Seconds 15  # Allow time for Store to open
             Write-Status "✅ Triggered Store updates check" -Status SUCCESS
             return $true
