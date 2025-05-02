@@ -112,6 +112,7 @@ function Update-StoreApps {
             }
         } catch {
             Write-Status "⚠️ Modern Store API failed, trying manual method..." -Status WARNING
+            Start-Process "ms-windows-store://downloadsandupdates" -ErrorAction Stop
         }
 
         # Method 3: URI Scheme
