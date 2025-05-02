@@ -98,6 +98,8 @@ function Update-StoreApps {
 
         # Method 2: Modern Store API
         try {
+        Start-Process "ms-windows-store://downloadsandupdates" -ErrorAction Stop
+        Write-Status "Opened Store updates page" -Status INFO
             $Store = New-Object -ComObject "Microsoft.Store.PartnerCenter.StoreContext"
             $Updates = $Store.GetAppAndOptionalStorePackageUpdatesAsync().GetAwaiter().GetResult()
             
@@ -117,8 +119,9 @@ function Update-StoreApps {
 
         # Method 3: URI Scheme
         try {
-            Start-Process "ms-windows-store://downloadsandupdates" -ErrorAction Stop
-            Start-Sleep -Seconds 15  # Allow time for Store to open
+        Start-Process "ms-windows-store://downloadsandupdates" -ErrorAction Stop
+        Write-Status "Opened Store updates page" -Status INFO
+        return $true
             Write-Status "✅ Triggered Store updates check" -Status SUCCESS
             return $true
         } catch {
